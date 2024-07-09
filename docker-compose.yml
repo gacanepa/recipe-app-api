@@ -19,6 +19,7 @@ services:
       - DB_USER=${POSTGRES_USER}
       - DB_PASSWORD=${POSTGRES_PASSWORD}
       - DB_PORT=5432
+      - DEBUG=True
     depends_on:
       - db
 
