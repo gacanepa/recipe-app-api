@@ -1,4 +1,4 @@
-FROM python:3.9.18-alpine3.18
+FROM python:3.9.19-alpine3.19
 LABEL maintainer="Gabriel Cánepa"
 LABEL version="1.0"
 LABEL description="Dockerfile for the recipe app API"
@@ -11,6 +11,7 @@ COPY ./requirements.dev.txt /tmp/requirements.dev.txt
 COPY ./app /app
 WORKDIR /app
 EXPOSE 9000
+RUN mkdir -p locale
 
 # Install dependencies and create a user to run the app.
 # Adding all the commands in a single RUN statement allows Docker to cache the
@@ -18,7 +19,8 @@ EXPOSE 9000
 ARG DEV=false
 RUN python -m venv /py && \
   /py/bin/pip install --upgrade pip && \
-  apk add --update --no-cache postgresql-client && \
+  apk update && \
+  apk add --update --no-cache postgresql-client gettext && \
   apk add --update --no-cache --virtual .tmp-build-deps \
     build-base postgresql-dev musl-dev && \
   /py/bin/pip install -r /tmp/requirements.txt && \
