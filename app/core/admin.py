@@ -4,6 +4,7 @@ Django admin customization
 
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
+from django.utils.translation import gettext_lazy as _
 
 from core import models
 
@@ -16,17 +17,16 @@ class UserAdmin(BaseUserAdmin):
     # Each inner tuple represents a section (which consists of an optional title and a dictionary of options)
     fieldsets = (
         # First section: None means no title
-        (None, {'fields': ('email', 'password')}),
+        (None, {"fields": ("email", "password")}),
         # Second section: Personal Info title
-        ('Personal Info', {'fields': ('name',)}),
-        # Third section: Permissions title
-        (
-            'Permissions',
-            {'fields': ('is_active', 'is_staff', 'is_superuser')}
-        ),
+        (_("Personal Info"), {"fields": ("name",)}),
+        # Third section: Permissions title (_ is a convention for translation)
+        (_("Permissions"), {"fields": ("is_active", "is_staff", "is_superuser")}),
         # Fourth section: Important dates
-        ('Important dates', {'fields': ('last_login',)})
+        (_("Important dates"), {"fields": ("last_login",)}),
     )
+    readonly_fields = ('last_login',)
+
     # The add_fieldsets attribute is the same as fieldsets, but for the add page
     add_fieldsets = (
         (None, {
