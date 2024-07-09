@@ -11,6 +11,7 @@ COPY ./requirements.dev.txt /tmp/requirements.dev.txt
 COPY ./app /app
 WORKDIR /app
 EXPOSE 9000
+RUN mkdir locale
 
 # Install dependencies and create a user to run the app.
 # Adding all the commands in a single RUN statement allows Docker to cache the
@@ -18,7 +19,7 @@ EXPOSE 9000
 ARG DEV=false
 RUN python -m venv /py && \
   /py/bin/pip install --upgrade pip && \
-  apk add --update --no-cache postgresql-client && \
+  apk add --update --no-cache postgresql-client gettext && \
   apk add --update --no-cache --virtual .tmp-build-deps \
     build-base postgresql-dev musl-dev && \
   /py/bin/pip install -r /tmp/requirements.txt && \
