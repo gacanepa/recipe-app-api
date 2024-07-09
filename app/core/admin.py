@@ -31,7 +31,8 @@ class UserAdmin(BaseUserAdmin):
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
-            'fields': ('email', 'password', 'password_confirmation')
+            # password1 and password2 align with the convention of Django's default password fields
+            'fields': ('email', 'password1', 'password2', 'name', 'is_active', 'is_staff', 'is_superuser'),
         }),
     )
 
