@@ -19,6 +19,7 @@ RUN mkdir -p locale
 ARG DEV=false
 RUN python -m venv /py && \
   /py/bin/pip install --upgrade pip && \
+  apk update && \
   apk add --update --no-cache postgresql-client gettext && \
   apk add --update --no-cache --virtual .tmp-build-deps \
     build-base postgresql-dev musl-dev && \
