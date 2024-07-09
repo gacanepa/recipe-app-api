@@ -1,4 +1,4 @@
-FROM python:3.9.19-alpine
+FROM python:3.9.19-alpine3.19
 LABEL maintainer="Gabriel Cánepa"
 LABEL version="1.0"
 LABEL description="Dockerfile for the recipe app API"
