@@ -11,7 +11,7 @@ COPY ./requirements.dev.txt /tmp/requirements.dev.txt
 COPY ./app /app
 WORKDIR /app
 EXPOSE 9000
-RUN mkdir locale
+RUN mkdir -p locale
 
 # Install dependencies and create a user to run the app.
 # Adding all the commands in a single RUN statement allows Docker to cache the
